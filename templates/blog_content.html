@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% load staticfiles %}
+
+{% block link %}
+    <link rel="stylesheet" type="text/css" href="/static/ueditor/third-party/SyntaxHighlighter/shCoreDefault.css">
+<script type="text/javascript" src="/static/ueditor/third-party/SyntaxHighlighter/shCore.js"></script>
+<script type="text/javascript" charset="utf-8" src="/static/ueditor/ueditor.config.js"></script>
+<script type="text/javascript" charset="utf-8" src="/static/ueditor/ueditor.all.min.js"> </script>
+<script type="text/javascript" charset="utf-8" src="/static/ueditor/lang/zh-cn/zh-cn.js"></script>
+
+<script type="text/javascript">
+    var ue = UE.getEditor('editor');
+    SyntaxHighlighter.all();
+</script>
+{% endblock %}
+{% block content %}
+    <div class="a_title">
+    <form action="/blog/post_content/"  method="post" role="form">
+        <input class="content" value=" {{ blog.title }} " name="title">
+
+        <p class="dataview">
+            <span >{{ blog.category.name }}</span>
+            <span class="author" style="color: #4a86e8">作者：{{ blog.author }}</span>
+            <span class="created" style="color: #6aa84f">撰写时间：{{ blog.created_time|date:"Y-m-d H:i" }}</span>
+        </p>
+
+{#        <div class="a_content">#}
+{#            <p> {{ blog.content |safe }}</p>#}
+{#        </div>#}
+        <script id="editor" type="text/plain" style="width:auto;height:500px;">{{ blog.content|safe }}</script>
+        <input type="button" onclick="" value="保存"/>
+    </form>
+    </div>
+
+
+{% endblock %}

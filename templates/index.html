@@ -1,0 +1,106 @@
+{% extends 'base.html' %}
+{% block link %}
+    <link href="/static/css/index.css" rel="stylesheet">
+    <!--所使用的SyntaxHighlighter样式-->
+    <link type="text/css" rel="stylesheet" href="/static/ueditor/third-party/SyntaxHighlighter/shCoreDefault.css"/> <!--这里挑选高亮方式-->
+    <!--初始化SyntaxHighlighter的必须代码，必须放在head中，引入文件之后-->
+    <script type="text/javascript">SyntaxHighlighter.all();</script>
+{% endblock %}
+{% block yemei %}
+    <div style=" margin:0 auto; width: 100%; height: 220px;" id="sosobtc_market"></div>
+    <script src="/static/js/sosobtc_plugin.js"></script>
+    <script type="text/javascript">
+        (function () {
+            SOSOBTC('Market').init({
+                id: 'sosobtc_market',
+                others: ['btc_jubi','bcc_jubi','eth_jubi','ltc_jubi','ugt_jubi','xas_jubi','rss_jubi','ico_jubi'],
+                row: ['price', 'buy', 'sell', 'high', 'low', 'vol']
+            });
+        })();
+    </script>
+{% endblock %}
+
+{% block content %}
+
+        {% for blog in blogs %}
+            <h3><a href="{% url 'blog_get_detail' blog.id %}">{{ blog.title }}</a></h3>
+            <figure><img src="/static/images/img_1.jpg" alt="【心路历程】请不要在设计这条路上徘徊啦"></figure>
+            <ul>
+                <p> {{ blog.content | truncatechars:100 }}</p>
+                <a title="【心路历程】请不要在设计这条路上徘徊啦" href="{% url 'blog_get_detail' blog.id %}" target="_blank" class="readmore">阅读全文&gt;&gt;
+                </a>
+            </ul>
+            <p class="dateview"><span>{{ blog.created_time |date:"Y-m-d H:i" }}</span><span>作者：{{ blog.author }}</span><span>个人博客：[<a href="/jstt/bj/">心得笔记</a>]</span></p>
+        {% endfor %}
+
+
+
+{% endblock %}
+
+
+{% block guanzhu %}
+
+      <div class="tit01">
+        <h3 class="tit">关注我</h3>
+        <div class="gzwm">
+          <ul>
+{#            <li><a class="tel" href="#" target="_blank">我的电话</a></li>#}
+            <li><a class="email" href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=ESglIyUmJicgKVFgYD9yfnw" target="_blank">我的邮箱</a></li>
+            <li><a class="qq" href="tencent://message/?uin=942477618&Site=&Menu=yes" target="_blank">在线QQ</a></li>
+
+          </ul>
+        </div>
+      </div>
+
+{% endblock %}
+
+{% block tuwen %}
+    <div class="tuwen">
+                <h3 class="tit">图文推荐</h3>
+            </div>
+{% endblock %}
+
+{% block ph %}
+    <div class="ph">
+        <h3 class="tit">点击排行</h3>
+        <ul class="rank">
+          <li><a href="/jstt/bj/2017-07-13/784.html" title="【心路历程】请不要在设计这条路上徘徊啦" target="_blank">【心路历程】请不要在设计这条路上徘徊啦</a></li>
+          <li><a href="/news/s/2016-05-20/751.html" title="IP要突破2000+了" target="_blank">IP要突破2000+了</a></li>
+          <li><a href="/jstt/web/2015-07-03/749.html" title="帝国cms首页、自定义页面如何实现分页" target="_blank">帝国cms首页、自定义页面如何实现分页</a></li>
+          <li><a href="/jstt/web/2015-02-25/745.html" title="【已评选】给我模板PSD源文件，我给你设计HTML！" target="_blank">【已评选】给我模板PSD源文件，我给你设计HTML！</a></li>
+          <li><a href="/jstt/bj/2015-02-14/744.html" title="【郑重申明】本站只提供静态模板下载！" target="_blank">【郑重申明】本站只提供静态模板下载！</a></li>
+          <li><a href="/news/s/2015-01-23/741.html" title="【孕期日记】生活本该如此" target="_blank">【孕期日记】生活本该如此</a></li>
+          <li><a href="/jstt/bj/2015-01-09/740.html" title="【匆匆那些年】总结个人博客经历的这四年…" target="_blank">【匆匆那些年】总结个人博客经历的这四年…</a></li>
+          <li><a href="/jstt/web/2015-01-01/739.html" title=" 2014年度优秀个人博客排名公布" target="_blank"> 2014年度优秀个人博客排名公布</a></li>
+          <li><a href="/jstt/web/2014-12-18/736.html" title="2014年度优秀个人博客评选活动" target="_blank">2014年度优秀个人博客评选活动</a></li>
+          <li>
+              <a href="/jstt/css3/2014-12-09/734.html" title="使用CSS3制作文字、图片倒影" target="_blank">使用CSS3制作文字、图片倒影</a>
+          </li>
+          <li>
+              <a href="/jstt/css3/2014-11-18/733.html" title="【分享】css3侧边栏导航不同方向划出效果" target="_blank">【分享】css3侧边栏导航不同方向划出效果
+              </a>
+          </li>
+          <li>
+              <a href="/jstt/bj/2014-11-06/732.html" title="分享我的个人博客访问量如何做到IP从10到600的(图文)" target="_blank">分享我的个人博客访问量如何做到IP从10到600的(图文)</a>
+          </li>
+        </ul>
+      </div>
+
+{% endblock %}
+
+{% block yejiao %}
+    <!-- SOSOBTC Widget Begin -->
+<script type="text/javascript"
+    src="//static2.sosobtc.com/sb.js"
+></script>
+<script type="text/javascript">
+    new SOSOBTC.widget({
+        "symbol": "QTUM:JUBI",
+        "default_step": 60,
+        "default_theme": "dark",
+        "disable_theme_change": true,
+        "container": "kline_container"
+    })
+</script>
+<!-- SOSOBTC Widget End -->
+{% endblock %}

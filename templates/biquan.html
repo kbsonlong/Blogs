@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <div style="width: 100%; height: 560px;">
+        <!-- SOSOBTC Widget Begin -->
+        <script type="text/javascript"
+            src="//static2.sosobtc.com/sb.js"
+        ></script>
+        <script type="text/javascript">
+            new SOSOBTC.widget({
+                "symbol": "QTUM:JUBI",
+                "default_step": 60,
+                "default_theme": "dark",
+                "disable_theme_change": true,
+                "container": "kline_container"
+            })
+        </script>
+        <!-- SOSOBTC Widget End -->
+    </div>
+
+{% endblock %}
