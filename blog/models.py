@@ -37,7 +37,7 @@ class Blog(models.Model):
                            default=u'', blank=True, imagePath="uploads/images/",
                            toolbars='besttome', filePath='uploads/files/')
     created_time = models.DateTimeField('发布时间',auto_now_add=True)
-    updated_time = models.DateTimeField('最后更新时间', auto_now_add=True, default=datetime.now())
+    # updated_time = models.DateTimeField('最后更新时间', auto_now_add=True, default=datetime.now())
     catagory = models.ForeignKey(Catagory,verbose_name='分类')
     tags = models.ManyToManyField(Tag,verbose_name='标签')
 
