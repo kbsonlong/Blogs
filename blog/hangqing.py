@@ -1,8 +1,32 @@
-<!DOCTYPE html>
+#!/usr/bin/python
+# -*- coding: UTF-8 -*-
+
+#发送带附件邮件
+import smtplib
+from email.mime.text import MIMEText
+from email.mime.multipart import MIMEMultipart
+from email.mime.base import MIMEBase
+from email import encoders
+from block_api import get_info
+import traceback
+
+
+def sendmail(Smtp_Server,Smtp_user,Smtp_password,Subject,TO=[],files=[]):
+    # 实例
+    msg = MIMEMultipart('alternative')
+    msg['To'] = ';'.join(TO)
+    msg['From'] = Smtp_user
+    msg['Subject'] = Subject
+
+    data = get_info('https://block.cc/api/v1/coin/list?size=18')
+
+    html_context = """<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>数字货币交易数据</title>
+</head>
+<body>
     <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.2.1.js">
     </script>
 
@@ -37,7 +61,45 @@
 
     <script>
         $(document).ready(function(){
-        var packJson = {{ data }};
+        var packJson = "{
+    "code": 0,
+    "message": "success",
+    "data": {
+        "list": [
+            {
+                "id": "bitcoin",
+                "name": "Bitcoin",
+                "symbol": "BTC",
+                "change1d": -6.59,
+                "available_supply": "16819075.0",
+                "price": 11286.16076131,
+                "volume_ex": 6277883154.741826,
+                "marketCap": 189822784306,
+                "change1h": -1.29,
+                "change7d": -20.8,
+                "suggest_ex": [
+                    {
+                        "display_name": "Coincheck",
+                        "zh_name": "Coincheck",
+                        "link": "https://coincheck.com/",
+                        "name": "coincheck"
+                    },
+                    {
+                        "display_name": "Huobi.pro",
+                        "zh_name": "火币",
+                        "link": "https://www.huobi.pro/ko-kr/btc_usdt/exchange/",
+                        "name": "huobipro"
+                    }
+                ],
+                "listingTime": null,
+                "zhName": "比特币"
+            }
+        ],
+        "page": 0,
+        "size": 1,
+        "pageCount": 1822
+    }
+}";
         var l = typeof(packJson);
         $("p#wods").append("<b>l</b>");
         var lists = packJson.data.list;
@@ -71,8 +133,6 @@
     </script>
 
 
-</head>
-<body>
 
     <button id="showimage2" type="button" >查看二维码</button>
     <p><b>数据来源于<a href="https://block.cc/" target="_blank">block.cc</a> </b></p>
@@ -97,4 +157,35 @@
 
     </table>
 </body>
-</html>
+</html>"""
+    print html_context
+    content = MIMEText(html_context, 'html', 'utf-8')
+    msg.attach(content)
+
+    # 构造附件，当多个为附件是用for读取构造
+    # for file in files:
+    #     part = MIMEBase('application', 'octet-stream')  # 'octet-stream': binary data
+    #     part.set_payload(open(file, 'rb').read())
+    #     encoders.encode_base64(part)
+    #     part.add_header('Content-Disposition', 'attachment; filename="%s"' % file)
+    #     msg.attach(part)
+
+    try:
+        server = smtplib.SMTP_SSL(Smtp_Server, 465)
+        server.login(Smtp_user, Smtp_password)
+        server.sendmail(Smtp_user, TO, msg.as_string())
+        server.quit()
+        message = 'Sendmail Success'
+    except Exception, e:
+        print str(e)
+        message = traceback.format_exc()
+    return message
+
+if __name__ == '__main__':
+
+    smtp_server = 'smtp.qq.com'
+    smtp_user = 'kbsonlong@qq.com'
+    smtp_pass = 'puvvwmufacopbbcg'
+    subject = '数字货币行情预览'
+    sendto = ['kbsonlong@qq.com']
+    sendmail(smtp_server,smtp_user, smtp_pass,subject,sendto,files=[])
