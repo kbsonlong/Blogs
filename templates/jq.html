@@ -31,8 +31,6 @@
               }
         }
     </script>
-
-
     <script type="text/javascript">
         $(document).ready(function(){
           $("button#image_button").click(function(){
@@ -71,32 +69,24 @@
 
 
 <script>
-var packJson1 ={{ data }};
-
-var packJson = [
-
-{"name":"nikita", "password":"1111"},
-
-{"name":"tony", "password":"2222"}
-
-];
-var l = packJson.length;
-for(var i = 0; i < l; i++){
-    alert(l);
-   alert(packJson[i].name + " " + packJson[i].password);
-}
+    var packJson = {{ data }};
+    var l = packJson.length;
+    for(var i = 0; i < l; i++){
+        alert(l);
+       alert(packJson[i].name + " " + packJson[i].price);
+    }
 </script>
 
 
 </head>
 <body>
-
+<p>{{ data }}</p>
 
 
 <button id="demo2" type="button" onclick="changeImage()" >点亮或熄灭这盏灯</button>
 <img id="myimage"  src="/static/jq_imgs/eg_bulboff.gif">
 
-<p>{{ data }}</p>
+
 <button id="showimage2" type="button" >查看二维码</button>
 
 

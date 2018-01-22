@@ -5,6 +5,7 @@ import logging
 import urllib2
 import traceback
 import os
+import json
 
 headers = {'Content-Type':'application/json;charset=UTF-8'}
 
@@ -21,8 +22,9 @@ def get_info(url):
         # print response.getcode()
         # print response.geturl()
         # print response.info()
-        result = response.read()
+        result = json.load(response)
         # logging.info("Success")
+        # print result
         return result
 
     except urllib2.URLError as e:
