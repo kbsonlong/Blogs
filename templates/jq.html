@@ -69,12 +69,11 @@
 
 
 <script>
-    var packJson = {{ data }};
-    var l = packJson.length;
-    for(var i = 0; i < l; i++){
-        alert(l);
-       alert(packJson[i].name + " " + packJson[i].price);
-    }
+    var packJson = "{{ data }}";
+    var l = typeof(packJson);
+    <!--for(var i = 0; i < 1; i++){-->
+       <!--alert(packJson[0].name + " " + packJson[0].price);-->
+    <!--}-->
 </script>
 
 

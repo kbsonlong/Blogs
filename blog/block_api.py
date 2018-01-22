@@ -22,7 +22,7 @@ def get_info(url):
         # print response.getcode()
         # print response.geturl()
         # print response.info()
-        result = json.load(response)
+        result = response.read()
         # logging.info("Success")
         # print result
         return result

@@ -27,36 +27,6 @@ def about(request):
     return render_to_response('about.html',{'blogs':''})
 
 
-from django.http import HttpResponse
-
-import json
-
-def test(request):
-
-    resp = {
-        'code': '200',
-        'message': 'success',
-        'data': {
-            'num': '1234',
-        },
-    }
-
-    response = HttpResponse(content=json.dumps(resp), content_type='application/json;charset = utf-8',
-    status='200',
-    reason='success',
-    charset='utf-8')
-
-    return response
-
-
-
-def jq(request):
-    from block_api import get_info
-    import json
-    data=get_info('https://block.cc/api/v1/coin/list?size=1')
-    return render(request, 'jq.html', {'data': json.dumps(data)})
-
-
 def listpic(request):
 
     return render_to_response('listpic.html',{'blogs':''})
