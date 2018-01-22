@@ -4,12 +4,46 @@
     <meta charset="UTF-8">
     <title>数字货币行情预览</title>
     <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.2.1.js"></script>
-<script>
-$(document).ready(function(){
-    $("button").click(function(){
-        var in_value = $("#test_input").val();
-        $.getJSON("https://block.cc/api/v1/coin/list?size="+in_value +"/",function(data,status){
-            $("tbody").remove();  //移除
+    <script>
+    $(document).ready(function(){
+        $("button").click(function(){
+            var in_value = $("#test_input").val();
+            $.getJSON("https://block.cc/api/v1/coin/list?size="+in_value +"/",function(data,status){
+                $("tbody").remove();  //移除
+                var packJson = data;
+                var lists = packJson.data.list;
+                for(var i = 0,j=1; i <= lists.length; i++,j++){
+                    //将数据追加到id为hq的p标签
+                    if (lists[i].zhName==""){
+                        $("table").append("<tbody id='btc'><tr>" +
+                       "<td>" + j +"</td>" +
+                       "<td>" + lists[i].symbol + "-" + lists[i].name + "</td>" +
+                       "<td>" + lists[i].price +"</td>" +
+                       "<td>" + lists[i].change1h +"</td>" +
+                       "<td>" + lists[i].change1d +"</td>" +
+                       "<td>" + lists[i].volume_ex +"</td>" +
+                       "<td>" + lists[i].marketCap +"</td>" +
+                       "<td>" + lists[i].change7d +"</td>" +
+                       "</tr></tbody>");}
+                    else {
+                       $("table").append("<tbody id='btc'><tr>" +
+                           "<td>" + j +"</td>" +
+                           "<td>" + lists[i].symbol + "-" + lists[i].zhName + "</td>" +
+                           "<td>" + lists[i].price +"</td>" +
+                           "<td>" + lists[i].change1h +"</td>" +
+                           "<td>" + lists[i].change1d +"</td>" +
+                           "<td>" + lists[i].volume_ex +"</td>" +
+                           "<td>" + lists[i].marketCap +"</td>" +
+                           "<td>" + lists[i].change7d +"</td>" +
+                           "</tr></tbody>");}
+                }
+
+            });
+        });
+    });
+
+    $(document).ready(function(){
+        $.getJSON("https://block.cc/api/v1/coin/list?size=10",function(data,status){
             var packJson = data;
             var lists = packJson.data.list;
             for(var i = 0,j=1; i <= lists.length; i++,j++){
@@ -40,47 +74,20 @@ $(document).ready(function(){
 
         });
     });
-});
+    </script>
 
-$(document).ready(function(){
-    $.getJSON("https://block.cc/api/v1/coin/list?size=10",function(data,status){
-        var packJson = data;
-        var lists = packJson.data.list;
-        for(var i = 0,j=1; i <= lists.length; i++,j++){
-            //将数据追加到id为hq的p标签
-            if (lists[i].zhName==""){
-                $("table").append("<tbody id='btc'><tr>" +
-               "<td>" + j +"</td>" +
-               "<td>" + lists[i].symbol + "-" + lists[i].name + "</td>" +
-               "<td>" + lists[i].price +"</td>" +
-               "<td>" + lists[i].change1h +"</td>" +
-               "<td>" + lists[i].change1d +"</td>" +
-               "<td>" + lists[i].volume_ex +"</td>" +
-               "<td>" + lists[i].marketCap +"</td>" +
-               "<td>" + lists[i].change7d +"</td>" +
-               "</tr></tbody>");}
-            else {
-               $("table").append("<tbody id='btc'><tr>" +
-                   "<td>" + j +"</td>" +
-                   "<td>" + lists[i].symbol + "-" + lists[i].zhName + "</td>" +
-                   "<td>" + lists[i].price +"</td>" +
-                   "<td>" + lists[i].change1h +"</td>" +
-                   "<td>" + lists[i].change1d +"</td>" +
-                   "<td>" + lists[i].volume_ex +"</td>" +
-                   "<td>" + lists[i].marketCap +"</td>" +
-                   "<td>" + lists[i].change7d +"</td>" +
-                   "</tr></tbody>");}
-        }
+    <script>
+        $("#test_input").bind("input propertychange",function(event){
+            $("#input_test2").val($("#test_input").val());
+        });
+    </script>
 
-    });
-});
-</script>
 </head>
 <body>
 
 <input id="test_input" placeholder="请输入想要查询市值排名前几名">
 <button>查询</button>
-
+<input id="input_test2">
 
 <table border="1">
         <thead>
