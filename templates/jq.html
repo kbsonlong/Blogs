@@ -38,8 +38,6 @@
     <script>
         $(document).ready(function(){
         var packJson = {{ data }};
-        var l = typeof(packJson);
-        $("p#wods").append("<b>l</b>");
         var lists = packJson.data.list;
         for(var i = 0,j=1; i <= lists.length; i++,j++){
            {#alert(lists[0].name + " " + lists[0].change1d);#}
