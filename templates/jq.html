@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.2.1.js">
+    </script>
+
+    <script type="text/javascript">
+$(document).ready(function(){
+  test=document.getElementById('showimg');
+  $("button#showimage").mouseover(function(){
+    test.src="/static/jq_imgs/eg_bulbon.gif";
+  });
+  $("button#showimage").mouseout(function(){
+    test.src="/static/jq_imgs/eg_bulboff.gif";
+  });
+});
+</script>
+    <script>
+        function changeImage()
+        {
+            element=document.getElementById('myimage')
+            if (element.src.match("bulbon"))
+              {
+                element.src="/static/jq_imgs/eg_bulboff.gif";
+              }
+            else
+              {
+                element.src="/static/jq_imgs/eg_bulbon.gif";
+              }
+        }
+    </script>
+
+
+
+    <script type="text/javascript">
+    //放大图片
+    $(function () {
+        var x = 0;
+        var y = 5;
+        $("button#showimage2").mouseover(
+        function (e) {
+            this.myTitle = this.title;
+            this.title = "";
+            var imgtip = "<div id='imgtip' style='position:absolute;'><img src='https://www.along.party/wp-content/themes/Cui2.0/img/weixin.bng' width='300' alt='预览图'/><\/div>"; //创建 div 元素
+            $("body").append(imgtip); //把它追加到文档中
+            $("#imgtip")
+                .css({
+                    "top": (e.pageY + y) + "px",
+                    "left": (e.pageX + x) + "px"
+                }).show("fast");   //设置x坐标和y坐标，并且显示
+        }
+        )
+        .mouseout(function ()
+        {
+            this.title = this.myTitle;
+            $("#imgtip").remove();  //移除
+        }
+        )
+        ;
+    });
+</script>
+</head>
+<body>
+
+
+
+<button id="demo2" type="button" onclick="changeImage()" >点亮或熄灭这盏灯</button>
+<img id="myimage"  src="/static/jq_imgs/eg_bulboff.gif">
+
+
+<button id="showimage2" type="button" >查看二维码</button>
+
+
+<button id="showimage" type="button" >点亮灯泡</button>
+<img id="showimg"  src="/static/jq_imgs/eg_bulboff.gif">
+</body>
+</html>

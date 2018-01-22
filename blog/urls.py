@@ -7,6 +7,7 @@ urlpatterns = [
     url(r'^test/$',test),
     url(r'^index/$',index),
     url(r'^about/$',about),
+    url(r'^jq/$',jq),
     url(r'^newslistpic/$',newslistpic),
     url(r'^listpic/$',listpic),
     url(r'^detail/(\d+)/$',get_details ,name='blog_get_detail'),
