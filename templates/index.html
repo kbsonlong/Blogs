@@ -7,17 +7,7 @@
     <script type="text/javascript">SyntaxHighlighter.all();</script>
 {% endblock %}
 {% block yemei %}
-    <div style=" margin:0 auto; width: 100%; height: 220px;" id="sosobtc_market"></div>
-    <script src="/static/js/sosobtc_plugin.js"></script>
-    <script type="text/javascript">
-        (function () {
-            SOSOBTC('Market').init({
-                id: 'sosobtc_market',
-                others: ['btc_jubi','bcc_jubi','eth_jubi','ltc_jubi','ugt_jubi','xas_jubi','rss_jubi','ico_jubi'],
-                row: ['price', 'buy', 'sell', 'high', 'low', 'vol']
-            });
-        })();
-    </script>
+
 {% endblock %}
 
 {% block content %}
@@ -89,18 +79,5 @@
 {% endblock %}
 
 {% block yejiao %}
-    <!-- SOSOBTC Widget Begin -->
-<script type="text/javascript"
-    src="//static2.sosobtc.com/sb.js"
-></script>
-<script type="text/javascript">
-    new SOSOBTC.widget({
-        "symbol": "QTUM:JUBI",
-        "default_step": 60,
-        "default_theme": "dark",
-        "disable_theme_change": true,
-        "container": "kline_container"
-    })
-</script>
-<!-- SOSOBTC Widget End -->
+
 {% endblock %}
