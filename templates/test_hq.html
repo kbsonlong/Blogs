@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>数字货币行情预览</title>
+    <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.2.1.js"></script>
+<script>
+$(document).ready(function(){
+    $("button").click(function(){
+        var in_value = $("#test_input").val();
+        $.get("https://block.cc/api/v1/coin/list?size="+in_value +"/",function(data,status){
+            $("tbody#btc").remove();  //移除
+            var packJson = data;
+            var lists = packJson.data.list;
+            for(var i = 0,j=1; i <= lists.length; i++,j++){
+                //将数据追加到id为hq的p标签
+                if (lists[i].zhName==""){
+                    $("table").append("<tbody id='btc'><tr>" +
+                   "<td>" + j +"</td>" +
+                   "<td>" + lists[i].symbol + "-" + lists[i].name + "</td>" +
+                   "<td>" + lists[i].price +"</td>" +
+                   "<td>" + lists[i].change1h +"</td>" +
+                   "<td>" + lists[i].change1d +"</td>" +
+                   "<td>" + lists[i].volume_ex +"</td>" +
+                   "<td>" + lists[i].marketCap +"</td>" +
+                   "<td>" + lists[i].change7d +"</td>" +
+                   "</tr></tbody>");}
+                else {
+                   $("table").append("<tbody id='btc'><tr>" +
+                       "<td>" + j +"</td>" +
+                       "<td>" + lists[i].symbol + "-" + lists[i].zhName + "</td>" +
+                       "<td>" + lists[i].price +"</td>" +
+                       "<td>" + lists[i].change1h +"</td>" +
+                       "<td>" + lists[i].change1d +"</td>" +
+                       "<td>" + lists[i].volume_ex +"</td>" +
+                       "<td>" + lists[i].marketCap +"</td>" +
+                       "<td>" + lists[i].change7d +"</td>" +
+                       "</tr></tbody>");}
+            }
+
+        });
+    });
+});
+
+$(document).ready(function(){
+    $.get("https://block.cc/api/v1/coin/list?size=10",function(data,status){
+        var packJson = data;
+        var lists = packJson.data.list;
+        for(var i = 0,j=1; i <= lists.length; i++,j++){
+            //将数据追加到id为hq的p标签
+            if (lists[i].zhName==""){
+                $("table").append("<tbody id='btc'><tr>" +
+               "<td>" + j +"</td>" +
+               "<td>" + lists[i].symbol + "-" + lists[i].name + "</td>" +
+               "<td>" + lists[i].price +"</td>" +
+               "<td>" + lists[i].change1h +"</td>" +
+               "<td>" + lists[i].change1d +"</td>" +
+               "<td>" + lists[i].volume_ex +"</td>" +
+               "<td>" + lists[i].marketCap +"</td>" +
+               "<td>" + lists[i].change7d +"</td>" +
+               "</tr></tbody>");}
+            else {
+               $("table").append("<tbody id='btc'><tr>" +
+                   "<td>" + j +"</td>" +
+                   "<td>" + lists[i].symbol + "-" + lists[i].zhName + "</td>" +
+                   "<td>" + lists[i].price +"</td>" +
+                   "<td>" + lists[i].change1h +"</td>" +
+                   "<td>" + lists[i].change1d +"</td>" +
+                   "<td>" + lists[i].volume_ex +"</td>" +
+                   "<td>" + lists[i].marketCap +"</td>" +
+                   "<td>" + lists[i].change7d +"</td>" +
+                   "</tr></tbody>");}
+        }
+
+    });
+});
+</script>
+</head>
+<body>
+
+<input id="test_input" placeholder="请输入想要查询市值排名前几名">
+<button>查询</button>
+
+
+<table border="1">
+        <thead>
+            <tr bgcolor="#696969">
+                <td><b>排名</b></td>
+                <td><b>名称</b></td>
+                <td><b>价格($)</b></td>
+                <td><b>涨幅(1h)</b></td>
+                <td><b>涨幅(24h)</b></td>
+                <td><b>交易量($)</b></td>
+                <td><b>市值($)</b></td>
+                <td><b>涨幅(7d)</b></td>
+            </tr>
+        </thead>
+
+
+    </table>
+
+</body>
+</html>
