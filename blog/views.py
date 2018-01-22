@@ -27,6 +27,12 @@ def about(request):
     return render_to_response('about.html',{'blogs':''})
 
 
+def jq(request):
+
+    return render_to_response('jq.html',{'blogs':''})
+
+
+
 def listpic(request):
 
     return render_to_response('listpic.html',{'blogs':''})
