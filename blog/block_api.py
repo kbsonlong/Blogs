@@ -9,7 +9,7 @@ import os
 headers = {'Content-Type':'application/json;charset=UTF-8'}
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-logging.basicConfig(filename='%s/logs/monitor.log' % BASE_DIR,level=logging.DEBUG,format='[%(asctime)s -%(name)s - %(levelname)s] %(message)s')
+# logging.basicConfig(filename='monitor.log' % BASE_DIR,level=logging.DEBUG,format='[%(asctime)s -%(name)s - %(levelname)s] %(message)s')
 
 
 
@@ -22,11 +22,11 @@ def get_info(url):
         # print response.geturl()
         # print response.info()
         result = response.read()
-        logging.info("Success")
+        # logging.info("Success")
         return result
 
     except urllib2.URLError as e:
-        logging.error(e)
+        # logging.error(e)
         if hasattr(e, 'code'):
             print 'Error code:', e.code
             # print e.read()

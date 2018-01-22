@@ -26,9 +26,16 @@ def about(request):
 
     return render_to_response('about.html',{'blogs':''})
 
-def jq(request):
 
-    return render_to_response('jq.html',{'blogs':''})
+
+
+def jq(request):
+    from block_api import get_info
+    import json
+    data=get_info('https://block.cc/api/v1/coin/list?size=5')
+    data = json.loads(data)['data']
+    print data
+    return render_to_response('jq.html',{'data':data})
 
 
 def listpic(request):
