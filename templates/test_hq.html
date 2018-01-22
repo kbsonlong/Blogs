@@ -8,8 +8,8 @@
 $(document).ready(function(){
     $("button").click(function(){
         var in_value = $("#test_input").val();
-        $.get("https://block.cc/api/v1/coin/list?size="+in_value +"/",function(data,status){
-            $("tbody#btc").remove();  //移除
+        $.getJSON("https://block.cc/api/v1/coin/list?size="+in_value +"/",function(data,status){
+            $("tbody").remove();  //移除
             var packJson = data;
             var lists = packJson.data.list;
             for(var i = 0,j=1; i <= lists.length; i++,j++){
@@ -43,7 +43,7 @@ $(document).ready(function(){
 });
 
 $(document).ready(function(){
-    $.get("https://block.cc/api/v1/coin/list?size=10",function(data,status){
+    $.getJSON("https://block.cc/api/v1/coin/list?size=10",function(data,status){
         var packJson = data;
         var lists = packJson.data.list;
         for(var i = 0,j=1; i <= lists.length; i++,j++){
