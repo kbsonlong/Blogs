@@ -7,39 +7,6 @@
     </script>
 
     <script type="text/javascript">
-        $(document).ready(function(){
-          test=document.getElementById('showimg');
-          $("button#showimage").mouseover(function(){
-            test.src="/static/jq_imgs/eg_bulbon.gif";
-          });
-          $("button#showimage").mouseout(function(){
-            test.src="/static/jq_imgs/eg_bulboff.gif";
-          });
-        });
-    </script>
-    <script>
-        function changeImage()
-        {
-            element=document.getElementById('myimage')
-            if (element.src.match("bulbon"))
-              {
-                element.src="/static/jq_imgs/eg_bulboff.gif";
-              }
-            else
-              {
-                element.src="/static/jq_imgs/eg_bulbon.gif";
-              }
-        }
-    </script>
-    <script type="text/javascript">
-        $(document).ready(function(){
-          $("button#image_button").click(function(){
-          $("img").toggle();
-          });
-        });
-    </script>
-
-    <script type="text/javascript">
     //放大图片
     $(function () {
         var x = 0;
@@ -69,32 +36,69 @@
 
 
 <script>
-    var packJson = "{{ data }}";
+    $(document).ready(function(){
+    var packJson = {{ data }};
     var l = typeof(packJson);
-    <!--for(var i = 0; i < 1; i++){-->
-       <!--alert(packJson[0].name + " " + packJson[0].price);-->
-    <!--}-->
+    var lists = packJson.data.list;
+    for(var i = 0,j=1; i <= lists.length; i++,j++){
+       {#alert(lists[0].name + " " + lists[0].change1d);#}
+        //将数据追加到id为hq的p标签
+        if (lists[i].zhName==""){
+            $("tbody#btc").append("<tr>" +
+           "<td>" + j +"</td>" +
+           "<td>" + lists[i].symbol + "-" + lists[i].name + "</td>" +
+           "<td>" + lists[i].price +"</td>" +
+           "<td>" + lists[i].change1h +"</td>" +
+           "<td>" + lists[i].change1d +"</td>" +
+           "<td>" + lists[i].volume_ex +"</td>" +
+           "<td>" + lists[i].marketCap +"</td>" +
+           "<td>" + lists[i].change7d +"</td>" +
+           "</tr>");}
+        else {
+           $("tbody#btc").append("<tr>" +
+               "<td>" + j +"</td>" +
+               "<td>" + lists[i].symbol + "-" + lists[i].zhName + "</td>" +
+               "<td>" + lists[i].price +"</td>" +
+               "<td>" + lists[i].change1h +"</td>" +
+               "<td>" + lists[i].change1d +"</td>" +
+               "<td>" + lists[i].volume_ex +"</td>" +
+               "<td>" + lists[i].marketCap +"</td>" +
+               "<td>" + lists[i].change7d +"</td>" +
+               "</tr>");}
+    }
+    });
 </script>
 
 
 </head>
 <body>
-<p>{{ data }}</p>
+    <button id="showimage2" type="button" >查看二维码</button>
+
+    <table border="1">
+        <thead>
+            <tr bgcolor="#696969">
+                <td><b>排名</b></td>
+                <td><b>名称</b></td>
+                <td><b>价格($)</b></td>
+                <td><b>涨幅(1h)</b></td>
+                <td><b>涨幅(24h)</b></td>
+                <td><b>交易量($)</b></td>
+                <td><b>市值($)</b></td>
+                <td><b>涨幅(7d)</b></td>
+            </tr>
+        </thead>
+
+        <tbody id="btc">
+
+        </tbody>
+
+    </table>
 
 
-<button id="demo2" type="button" onclick="changeImage()" >点亮或熄灭这盏灯</button>
-<img id="myimage"  src="/static/jq_imgs/eg_bulboff.gif">
-
-
-<button id="showimage2" type="button" >查看二维码</button>
-
-
-<button id="showimage" type="button" >点亮灯泡</button>
-<img id="showimg"  src="/static/jq_imgs/eg_bulboff.gif">
 
 
 
-<button id="image_button" type="button">切换</button>
+
 
 </body>
 </html>

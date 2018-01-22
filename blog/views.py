@@ -27,9 +27,16 @@ def about(request):
     return render_to_response('about.html',{'blogs':''})
 
 
-def jq(request):
-
-    return render_to_response('jq.html',{'blogs':''})
+def jq(request,n=50):
+    from block_api import get_info
+    from django.utils.safestring import mark_safe
+    try:
+        nums = request.GET.get('nums')
+    except:
+        nums=n
+    url='https://block.cc/api/v1/coin/list?size=%s' % nums
+    data=get_info(url)
+    return render_to_response('jq.html',{'data':mark_safe(data)})
 
 
 
