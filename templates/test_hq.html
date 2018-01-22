@@ -76,6 +76,8 @@
     });
     </script>
 
+
+{#    监测input输入值变化触发事件#}
     <script>
         $("#test_input").bind("input propertychange",function(event){
             $("#input_test2").val($("#test_input").val());
