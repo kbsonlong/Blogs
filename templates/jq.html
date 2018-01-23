@@ -34,15 +34,13 @@
     });
 </script>
 
-
     <script>
         $(document).ready(function(){
         var packJson = {{ data }};
         var lists = packJson.data.list;
         for(var i = 0,j=1; i <= lists.length; i++,j++){
-           {#alert(lists[0].name + " " + lists[0].change1d);#}
             //将数据追加到id为hq的p标签
-            if (lists[i].zhName==""){
+            if (typeof(lists[i].zhName) == "undefined"){
                 $("tbody#btc").append("<tr>" +
                "<td>" + j +"</td>" +
                "<td>" + lists[i].symbol + "-" + lists[i].name + "</td>" +
@@ -67,10 +65,6 @@
         }
         });
     </script>
-
-
-
-
 
 </head>
 <body>

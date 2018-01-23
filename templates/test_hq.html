@@ -6,7 +6,8 @@
     <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.2.1.js"></script>
     <script>
     $(document).ready(function(){
-        $("button").click(function(){
+        //点击查询按钮时触发
+        $("button#search").click(function(){
             var in_value = $("#test_input").val();
             $.getJSON("https://block.cc/api/v1/coin/list?size="+in_value +"/",function(data,status){
                 $("tbody").remove();  //移除
@@ -42,6 +43,7 @@
         });
     });
 
+    //页面加载时默认加载排名前十的数字货币
     $(document).ready(function(){
         $.getJSON("https://block.cc/api/v1/coin/list?size=10",function(data,status){
             var packJson = data;
@@ -88,7 +90,7 @@
 <body>
 
 <input id="test_input" placeholder="请输入想要查询市值排名前几名">
-<button>查询</button>
+<button id="search">查询</button>
 <input id="input_test2">
 
 <table border="1">

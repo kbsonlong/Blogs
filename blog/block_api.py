@@ -42,5 +42,3 @@ def get_info(url):
         if response:
             response.close()
 
-
-get_info('https://block.cc/api/v1/coin/list?size=50')
