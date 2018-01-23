@@ -21,7 +21,9 @@
     //页面加载时默认加载排名前十的数字货币
     $(document).ready(function(){
         $.getJSON("https://block.cc/api/v1/coin/list?size=10",function(data,status){
-            show_btc(data)
+            // alert(status);
+            console.log(status)
+            show_btc(data);
         });
     });
     </script>
@@ -44,6 +46,17 @@
 
 </head>
 <body>
+
+
+当前时间：
+<div id="time">
+    <script>
+        document.getElementById('time').innerHTML=new Date().toLocaleString();
+        setInterval("document.getElementById('time').innerHTML=new Date().toLocaleString();",1000);
+    </script>
+</div>
+
+
 
 <input id="test_input" placeholder="请输入想要查询市值排名前几名">
 <button id="search">查询</button>
